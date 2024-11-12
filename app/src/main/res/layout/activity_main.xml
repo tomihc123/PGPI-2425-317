@@ -1,18 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <TextView
+    <!-- Campo de entrada de DNI -->
+    <EditText
+        android:id="@+id/et_dni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese su DNI"
+        android:inputType="text"/>
+
+    <!-- Botón para buscar el DNI -->
+    <Button
+        android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Buscar Reservas"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:layout_marginTop="8dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Mostrar el nombre del usuario -->
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de Usuario"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Lista de reservas -->
+    <TextView
+        android:id="@+id/tv_reservations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reservas:"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Mostrar las reservas obtenidas -->
+    <LinearLayout
+        android:id="@+id/ll_reservations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>
