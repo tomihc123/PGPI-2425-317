@@ -1,74 +1,84 @@
 package com.example.villactiva
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.villactiva.databinding.ActivityMainBinding
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
-    private val db = FirebaseFirestore.getInstance()
+    private lateinit var loggedInUser: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnSearch.setOnClickListener {
-            val dni = binding.etDni.text.toString().trim()
-            if (dni.isNotEmpty()) {
-                fetchUserData(dni)
-            } else {
-                Toast.makeText(this, "Por favor ingrese un DNI", Toast.LENGTH_SHORT).show()
+        // Obtener el usuario logueado
+        loggedInUser = obtenerUsuarioLogueado()
+
+        if (loggedInUser.isEmpty()) {
+            // Si no hay usuario logueado, redirigir al com.example.villactiva.LoginActivity
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
+
+        setupBottomNavigation()
+
+        if (savedInstanceState == null) {
+            binding.bottomNavigation.selectedItemId = R.id.nav_home
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, HomeFragment())
+                .commit()
+        }
+    }
+
+    private fun obtenerUsuarioLogueado(): String {
+        val sharedPreferences = getSharedPreferences("VillactivaPrefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("logged_in_user", "") ?: ""
+    }
+
+    private fun setupBottomNavigation() {
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, HomeFragment())
+                        .commit()
+                    true
+                }
+                R.id.nav_reservations -> {
+                    val fragment = ReservationsFragment.newInstance(loggedInUser)
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .commit()
+                    true
+                }
+                R.id.nav_logout -> {
+                    cerrarSesion()
+                    true
+                }
+                else -> false
             }
         }
     }
 
-    private fun fetchUserData(dni: String) {
-        binding.tvUserName.text = ""
-        binding.llReservations.removeAllViews()
+    private fun cerrarSesion() {
+        // Eliminar el usuario logueado de SharedPreferences
+        val sharedPreferences = getSharedPreferences("VillactivaPrefs", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            clear()
+            apply()
+        }
 
-        db.collection("User").document(dni).get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    val name = document.getString("name")
-                    binding.tvUserName.text = "Nombre: $name"
-
-                    db.collection("User").document(dni).collection("Reservations")
-                        .get()
-                        .addOnSuccessListener { reservationSnapshot ->
-                            if (!reservationSnapshot.isEmpty) {
-                                // Recorre y muestra cada reserva
-                                for (reservation in reservationSnapshot) {
-                                    val reservationName = reservation.getString("name")
-                                    val textView = TextView(this)
-                                    textView.text = "- $reservationName"
-                                    binding.llReservations.addView(textView)
-                                }
-                            } else {
-                                Toast.makeText(this, "No tiene reservas", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                        .addOnFailureListener { exception ->
-                            Toast.makeText(
-                                this,
-                                "Error al obtener reservas: ${exception.message}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                } else {
-                    Toast.makeText(this, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
-                }
-            }
-            .addOnFailureListener { exception ->
-                Toast.makeText(
-                    this,
-                    "Error al obtener datos: ${exception.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+        // Cerrar sesión y redirigir al com.example.villactiva.LoginActivity
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

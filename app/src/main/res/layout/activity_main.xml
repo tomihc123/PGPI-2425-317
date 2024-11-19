@@ -1,52 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- Campo de entrada de DNI -->
-    <EditText
-        android:id="@+id/et_dni"
+    <!-- Contenedor para Fragments -->
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp" /> <!-- Espacio para el BottomNavigationView -->
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ingrese su DNI"
-        android:inputType="text"/>
-
-    <!-- Botón para buscar el DNI -->
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Buscar Reservas"
-        android:backgroundTint="@android:color/holo_blue_light"
-        android:layout_marginTop="8dp"/>
-
-    <!-- Mostrar el nombre del usuario -->
-    <TextView
-        android:id="@+id/tv_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre de Usuario"
-        android:textSize="18sp"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Lista de reservas -->
-    <TextView
-        android:id="@+id/tv_reservations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reservas:"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Mostrar las reservas obtenidas -->
-    <LinearLayout
-        android:id="@+id/ll_reservations"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="8dp"/>
-
-</LinearLayout>
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/cardview_dark_background"
+        app:itemTextColor="@color/cardview_dark_background" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
