@@ -11,7 +11,7 @@
         android:background="@android:color/holo_blue_light"
         android:gravity="center"
         android:padding="16dp"
-        android:text="Instalaciones deportvias"
+        android:text="Instalaciones deportivas"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold" />
