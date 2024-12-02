@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "396583576433",
+    "project_id": "villactiva-9faec",
+    "storage_bucket": "villactiva-9faec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396583576433:android:8bab79c4fc03025464ccd0",
+        "android_client_info": {
+          "package_name": "com.example.villactiva"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpMgcWQ-CFf0O07OAEiUS2iurDXIhh9bw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

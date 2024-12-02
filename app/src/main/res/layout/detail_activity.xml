@@ -1,0 +1,64 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Imagen del lugar -->
+    <ImageView
+        android:id="@+id/ivDetailImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Nombre del lugar -->
+    <TextView
+        android:id="@+id/tvDetailName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Descripción del lugar -->
+    <TextView
+        android:id="@+id/tvDetailDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Botón para hacer una reserva -->
+    <Button
+        android:id="@+id/btnMakeReservation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hacer Reserva"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Fechas seleccionadas -->
+    <TextView
+        android:id="@+id/tvSelectedDates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No se ha seleccionado ninguna fecha."
+        android:textSize="16sp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Botón para guardar la reserva -->
+    <Button
+        android:id="@+id/btnSaveReservation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Reserva"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:textColor="@android:color/white"
+        android:visibility="gone" />
+</LinearLayout>
