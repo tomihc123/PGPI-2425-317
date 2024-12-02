@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private val firestore = FirebaseFirestore.getInstance()
+    var firestore = FirebaseFirestore.getInstance()
     private val placesList = mutableListOf<Place>()
 
     override fun onCreateView(
@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
         binding.rvPlaces.adapter = adapter
     }
 
-    private fun fetchPlaces() {
+    fun fetchPlaces() {
         firestore.collection("Places").get()
             .addOnSuccessListener { snapshot ->
                 placesList.clear()

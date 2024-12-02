@@ -22,9 +22,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ReservationsFragment : Fragment() {
-    private lateinit var binding: FragmentReservationsBinding
+    lateinit var binding: FragmentReservationsBinding
     private val reservationsList = mutableListOf<Reservation>()
-    private val firestore = FirebaseFirestore.getInstance()
+    var firestore = FirebaseFirestore.getInstance()
     private var loggedInUser: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,7 +111,7 @@ class ReservationsFragment : Fragment() {
         binding.rvReservations.adapter = adapter
     }
 
-    private fun fetchReservations() {
+    fun fetchReservations() {
         loggedInUser?.let { userDni ->
             firestore.collection("User")
                 .document(userDni)
@@ -142,7 +142,7 @@ class ReservationsFragment : Fragment() {
         }
     }
 
-    private fun showDeleteDialog(onConfirm: () -> Unit) {
+    fun showDeleteDialog(onConfirm: () -> Unit) {
         AlertDialog.Builder(requireContext())
             .setTitle("Confirmar eliminación")
             .setMessage("¿Estás seguro de que deseas eliminar esta reserva?")
@@ -151,7 +151,7 @@ class ReservationsFragment : Fragment() {
             .show()
     }
 
-    private fun deleteReservation(reservation: Reservation) {
+    fun deleteReservation(reservation: Reservation) {
         loggedInUser?.let { userDni ->
             firestore.collection("User")
                 .document(userDni)
@@ -259,7 +259,7 @@ class ReservationsFragment : Fragment() {
             }
     }
 
-    private fun updateReservation(reservation: Reservation, newDateStart: Long, newDateEnd: Long) {
+    fun updateReservation(reservation: Reservation, newDateStart: Long, newDateEnd: Long) {
         loggedInUser?.let { userDni ->
             firestore.collection("User")
                 .document(userDni)

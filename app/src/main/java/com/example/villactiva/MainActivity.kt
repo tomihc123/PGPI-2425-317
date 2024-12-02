@@ -8,10 +8,10 @@ import com.example.villactiva.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private lateinit var loggedInUser: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun cerrarSesion() {
+    fun cerrarSesion() {
         // Eliminar el usuario logueado de SharedPreferences
         val sharedPreferences = getSharedPreferences("VillactivaPrefs", Context.MODE_PRIVATE)
         with(sharedPreferences.edit()) {

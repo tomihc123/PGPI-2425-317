@@ -10,9 +10,9 @@ import com.example.villactiva.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private val firestore = FirebaseFirestore.getInstance()
+    var firestore = FirebaseFirestore.getInstance()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Verificar si hay un usuario guardado
@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun verificarUsuario(dni: String) {
+    fun verificarUsuario(dni: String) {
         firestore.collection("User").document(dni).get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {

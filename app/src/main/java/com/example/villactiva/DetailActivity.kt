@@ -16,12 +16,12 @@ import java.util.*
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: DetailActivityBinding
-    private val firestore = FirebaseFirestore.getInstance()
-    private lateinit var loggedInUser: String
+    var firestore = FirebaseFirestore.getInstance()
+    lateinit var loggedInUser: String
 
-    private var idPlace: String = ""
-    private var selectedStartDate: Long = 0L
-    private var selectedEndDate: Long = 0L
+    var idPlace: String = ""
+    var selectedStartDate: Long = 0L
+    var selectedEndDate: Long = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,7 +95,7 @@ class DetailActivity : AppCompatActivity() {
         }.show()
     }
 
-    private fun validateDates() {
+    fun validateDates() {
         // Consultar todas las reservas para el idPlace
         firestore.collection("Reservations")
             .whereEqualTo("idPlace", idPlace)
@@ -159,7 +159,7 @@ class DetailActivity : AppCompatActivity() {
             }
     }
 
-    private fun saveReservation() {
+    fun saveReservation() {
         val image = intent.getStringExtra("PLACE_IMAGE") ?: ""
 
         val reservationData = hashMapOf(

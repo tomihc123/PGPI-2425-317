@@ -55,4 +55,14 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation("com.google.android.material:material:1.9.0")
+    testImplementation("org.mockito:mockito-core:4.6.1") // Mockito para crear mocks
+    testImplementation("org.mockito:mockito-inline:4.6.1") // Mockito inline para mocks avanzados
+    testImplementation("org.robolectric:robolectric:4.9") // Robolectric para pruebas con simulación de Android
+    testImplementation("androidx.test.ext:junit:1.1.5") // JUnit para pruebas unitarias en Android
+    // Dependencias para pruebas instrumentadas
+    androidTestImplementation("androidx.test.ext:junit:1.2.1") // JUnit para pruebas instrumentadas
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1") // Espresso para pruebas de UI
+    androidTestImplementation("androidx.test:core-ktx:1.6.1") // Core para pruebas con AndroidX
+
+
 }
